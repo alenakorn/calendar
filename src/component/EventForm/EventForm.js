@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {removeEvents, submitForm} from '../../redux/action/calendar'
 import moment from 'moment'
 
+import './EventForm.scss'
+
 class EventForm extends React.Component {
 
     state = {
@@ -48,7 +50,7 @@ class EventForm extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="form-wrapper">
                 <form onSubmit={this.handleSubmit}>
                     <button type="button" onClick={() => this.props.removeEvents(this.props.inputsValue.id)}>xDELx</button>
                     <input
@@ -76,8 +78,10 @@ class EventForm extends React.Component {
                         onChange={this.handleChange}
                     />
 
-                    <button>Cancel</button>
-                    <button type='button' onClick={this.handleSaveForm}>Save</button>
+                    <div className='btn-wrap'>
+                        <button className='btn-cancel'>Cancel</button>
+                        <button type='button' onClick={this.handleSaveForm}>Save</button>
+                    </div>
                 </form>
             </div>
         );

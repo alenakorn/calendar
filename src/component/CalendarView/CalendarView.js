@@ -7,6 +7,8 @@ import interactionPlugin from "@fullcalendar/interaction"
 import {connect} from 'react-redux'
 import {openForm, openFormWithValues} from '../../redux/action/calendar'
 
+import './CalendarView.scss'
+
 class CalendarView extends React.Component {
 
     calendarComponentRef = React.createRef();
@@ -32,13 +34,23 @@ class CalendarView extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='calendar-wrapper'>
                 <FullCalendar
                     defaultView="dayGridMonth"
                     header={{
-                        left: "today prev,next",
+                        left: "today,prev,next",
                         center: "title",
                         right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+                    }}
+                    buttonText={{
+                        today: 'Today',
+                        month: 'Month',
+                        week: 'Week',
+                        day: 'Day',
+                        list: 'Agenda',
+                        prev: 'Back',
+                        next: 'Next',
+
                     }}
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                     ref={this.calendarComponentRef}
