@@ -45,8 +45,17 @@ class CalendarView extends React.Component {
                     weekends={this.state.calendarWeekends}
                     events={[...this.props.calendarEvents]}
                     dateClick={this.handleDateClick}
-                    firstDay={1}
                     eventClick={this.handleClickEvent}
+                    firstDay={1}
+                    selectable={true}
+                    editable={true}
+                    droppable={true}
+                    eventDrop={function(eventBj, date) {
+                        console.log('eventDrop function');
+                    }}
+                    drop={(date, jsEvent, ui, resourceId) => {
+                        console.log('drop function');
+                    }}
                 />
             </div>
         )
