@@ -7,13 +7,16 @@ import './EventForm.scss'
 
 class EventForm extends React.Component {
 
-    state = {
-        title: this.props.inputsValue.title || "",
-        start: this.props.inputsValue.start || this.props.currentDate,
-        time: this.props.inputsValue.start || this.props.inputsValue.time,
-        notes: this.props.inputsValue.notes || ''
-    };
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: this.props.inputsValue.id,
+            title: this.props.inputsValue.title || "",
+            startDate: this.fromDate(this.props.inputsValue.start || this.props.currentDate)[0],
+            startTime: this.fromDate(this.props.inputsValue.time)[1],
+            notes: this.props.inputsValue.notes || ''
+        };
+    }
 
     fromDate(date) {
         return moment(date).format('YYYY-MM-DD|HH:mm').split('|')
@@ -32,11 +35,12 @@ class EventForm extends React.Component {
         })
     }
 
-    handleChangeDateTime = (event, type, dateRaw) => {
-        const value = (type === 'time') ? dateRaw : event.target.value;
-        const valueDate = this.toDate(value)
+    handleChangeDateTime = (event, type) => {
+        if (!(event && event.target)) {
+            return;
+        }
         this.setState({
-            [type]: valueDate,
+            [type]: event.target.value,
         })
     }
 
@@ -54,6 +58,11 @@ class EventForm extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <button type="button" onClick={() => this.props.removeEvents(this.props.inputsValue.id)}>xDELx</button>
                     <input
+                        type="hidden"
+                        name="id"
+                        value={this.state.id}
+                    />
+                    <input
                         type="text"
                         name="title"
                         value={this.state.title}
@@ -61,15 +70,15 @@ class EventForm extends React.Component {
                     />
                     <input
                         type="date"
-                        name="start"
-                        value={this.fromDate(this.state.start)[0]}
-                        onChange={event => this.handleChangeDateTime(event, 'date')}
+                        name="date"
+                        value={this.state.startDate}
+                        onChange={event => this.handleChangeDateTime(event, 'startDate')}
                     />
                     <input
                         type="time"
                         name="time"
-                        value={this.fromDate(this.state.time)[1]}
-                        onChange={event => this.handleChangeDateTime(event, 'time', this.fromDate(this.state.time))}
+                        value={this.state.startTime}
+                        onChange={event => this.handleChangeDateTime(event, 'startTime')}
                     />
                     <input
                         type="text"

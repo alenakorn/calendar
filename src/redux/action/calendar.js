@@ -15,11 +15,11 @@ export function openFormWithValues(values) {
 }
 
 export function submitForm(data) {
-    if (data.time) {
-        const time = data.time.split(':')
-        data.start.setHours(time[0], time[1])
-    }
-
+    console.log('submitForm > data', data)
+    // if (data.time) {
+    //     const time = data.time.split(':')
+    //     data.start.setHours(time[0], time[1])
+    // }
     return {
         type: CREATE_NEW_EVENT,
         data,

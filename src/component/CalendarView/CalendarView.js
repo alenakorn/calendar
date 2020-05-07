@@ -17,7 +17,9 @@ class CalendarView extends React.Component {
     }
 
     handleDateClick = arg => {
-        this.props.openForm(arg.date)
+        // this.props.openForm(arg.date)
+        console.log('handleDateClick()', arg.date)
+        return;
     }
 
     handleClickEvent = (event) => {
