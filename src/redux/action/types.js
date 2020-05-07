@@ -1,0 +1,2 @@
+export const SHOW_EVENT_FORM = 'SHOW_EVENT_FORM'
+export const CREATE_NEW_EVENT = 'CREATE_NEW_EVENT'
