@@ -19,6 +19,7 @@ const initialState = {
             notes: 'fu'
         }
     ],
+    coordinates: {},
     inputsValue: {},
     isEdit: false,
     currentDate: '',
@@ -39,7 +40,8 @@ export default function calendar(state = initialState, action) {
             }
             return {
                 ...state,
-                showEventForm: true, // @TODO: Fix IT!!!!
+                showEventForm: true,
+                coordinates: action.coordinates,
                 inputsValue: defaultInputValues
             }
         }
@@ -54,6 +56,7 @@ export default function calendar(state = initialState, action) {
         }
 
         case CREATE_EVENT:
+            console.log(action.data)
             const calendarEvents = state.calendarEvents
             const id = calendarEvents.length
             calendarEvents.push({...action.data, id})
@@ -87,6 +90,7 @@ export default function calendar(state = initialState, action) {
 
         case CLOSE_FORM:
             return {
+                ...state,
                 showEventForm: false,
             }
         default :

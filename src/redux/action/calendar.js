@@ -7,9 +7,10 @@ import {
     SHOW_EVENT_FORM_WITH_VALUE
 } from './types'
 
-export function openEventForm(currentDate) {
+export function openEventForm(currentDate, coordinates) {
     return {
         type: SHOW_EVENT_FORM,
+        coordinates,
         currentDate
     }
 }
@@ -21,7 +22,6 @@ export function openEventFormWithValues(values) {
     }
 }
 
-// @TODO: Implement
 export function editEvent(data) {
     return {
         type: EDIT_EVENT,

@@ -9,7 +9,7 @@ class EventForm extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = {
+        this.state  = {
             id: this.props.inputsValue.id,
             title: this.props.inputsValue.title || "",
             startDate: fromDate(this.props.inputsValue.start || this.props.currentDate)[0],
@@ -46,7 +46,7 @@ class EventForm extends React.Component {
 
     render() {
         return (
-            <div className="form-wrapper">
+            <div className="form-wrapper" style={{top: this.props.coordinates.top, left: this.props.coordinates.left}}>
                 <button className="btn-close" type="button" onClick={this.props.closeForm}>
                     <i className="fa fa-times-circle-o" aria-hidden="true"/>
                 </button>
@@ -98,7 +98,7 @@ class EventForm extends React.Component {
                         : (
                             <div className='btn-wrap'>
                                 <button className='btn-cancel' onClick={this.props.closeForm}>Cancel</button>
-                                <button type='button' onClick={this.props.createEvent}>Save</button>
+                                <button type='button' onClick={() => this.props.createEvent(this.state)}>Save</button>
                             </div>
                         )
                     }
@@ -113,7 +113,8 @@ function mapStateToProps(state) {
     return {
         currentDate: state.calendar.currentDate,
         inputsValue: state.calendar.inputsValue,
-        isEdit: state.calendar.isEdit
+        isEdit: state.calendar.isEdit,
+        coordinates: state.calendar.coordinates
     }
 }
 
