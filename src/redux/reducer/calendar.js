@@ -31,10 +31,11 @@ export default function calendar(state = initialState, action) {
     switch (action.type) {
 
         case SHOW_EVENT_FORM: {
+            const date = action.currentDate || new Date()
             const defaultInputValues = {
                 id: state.calendarEvents.length,
-                start: new Date(),
-                time: new Date(),
+                start: date,
+                time: date,
                 title: '',
                 notes: '',
             }
@@ -56,10 +57,14 @@ export default function calendar(state = initialState, action) {
         }
 
         case CREATE_EVENT:
-            console.log(action.data)
-            const calendarEvents = state.calendarEvents
-            const id = calendarEvents.length
-            calendarEvents.push({...action.data, id})
+            const calendarEvents = [...state.calendarEvents]
+            calendarEvents.push({
+                id: calendarEvents.length,
+                title: action.data.title,
+                start: toDate(`${action.data.startDate}|${action.data.startTime}`),
+                time: action.data.time,
+                notes: action.data.notes
+            })
             return {
                 ...state,
                 showEventForm: false,
@@ -93,6 +98,7 @@ export default function calendar(state = initialState, action) {
                 ...state,
                 showEventForm: false,
             }
+
         default :
             return state;
     }

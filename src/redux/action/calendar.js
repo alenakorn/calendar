@@ -45,7 +45,6 @@ export function removeEvent(id) {
 }
 
 export function closeForm() {
-    console.log('close')
     return {
         type: CLOSE_FORM
     }

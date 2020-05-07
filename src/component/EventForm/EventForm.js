@@ -42,6 +42,7 @@ class EventForm extends React.Component {
 
     editEvent = () => {
         this.props.editEvent(this.state)
+        this.props.closeForm()
     }
 
     render() {

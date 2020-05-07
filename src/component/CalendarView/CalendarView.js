@@ -5,7 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid"
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from "@fullcalendar/interaction"
 import {connect} from 'react-redux'
-import {openEventForm, openEventFormWithValues} from '../../redux/action/calendar'
+import {closeForm, openEventForm, openEventFormWithValues} from '../../redux/action/calendar'
 
 import './CalendarView.scss'
 
@@ -16,19 +16,17 @@ class CalendarView extends React.Component {
         calendarWeekends: true,
     }
 
-    createEvent = event => {
+    createEventForm = event => {
         const rect = event.jsEvent.toElement.getBoundingClientRect()
         const coordinates = {
             top: rect.bottom - (rect.height/2),
             left: rect.left
         }
-
+        this.props.closeForm()
         this.props.openEventForm(event.date, coordinates)
     }
 
-
-
-    editEvent = (event) => {
+    editEventForm = (event) => {
         this.props.openEventFormWithValues({
             id: +event.event.id,
             title: event.event.title,
@@ -62,8 +60,8 @@ class CalendarView extends React.Component {
                     ref={this.calendarComponentRef}
                     weekends={this.state.calendarWeekends}
                     events={[...this.props.calendarEvents]}
-                    dateClick={this.createEvent}
-                    eventClick={this.editEvent}
+                    dateClick={this.createEventForm}
+                    eventClick={this.editEventForm}
                     firstDay={1}
                     selectable={true}
                     editable={true}
@@ -87,6 +85,7 @@ function mapDispatchToProps(dispatch) {
     return {
         openEventForm: (currentDay, coordinates) => dispatch(openEventForm(currentDay, coordinates)),
         openEventFormWithValues: values => dispatch(openEventFormWithValues(values)),
+        closeForm: () => dispatch(closeForm()),
     }
 }
 
