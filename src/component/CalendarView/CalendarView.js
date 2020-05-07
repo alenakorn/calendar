@@ -27,13 +27,22 @@ class CalendarView extends React.Component {
     }
 
     editEventForm = (event) => {
+        const rect = event.jsEvent.toElement.getBoundingClientRect()
         this.props.openEventFormWithValues({
             id: +event.event.id,
             title: event.event.title,
             start: event.event.start,
             time: event.event.start,
             notes: event.event.extendedProps.notes
-        })
+        }, this.getCoordinates(rect))
+    }
+
+    getCoordinates = (rect) => {
+        return  {
+            top: rect.bottom - (rect.height/2) + 20,
+            left: rect.left - 20
+        }
+
     }
 
     render() {
@@ -84,7 +93,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         openEventForm: (currentDay, coordinates) => dispatch(openEventForm(currentDay, coordinates)),
-        openEventFormWithValues: values => dispatch(openEventFormWithValues(values)),
+        openEventFormWithValues: (values, coordinates) => dispatch(openEventFormWithValues(values, coordinates)),
         closeForm: () => dispatch(closeForm()),
     }
 }

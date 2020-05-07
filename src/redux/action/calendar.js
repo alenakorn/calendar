@@ -15,10 +15,11 @@ export function openEventForm(currentDate, coordinates) {
     }
 }
 
-export function openEventFormWithValues(values) {
+export function openEventFormWithValues(values, coordinates) {
     return {
         type: SHOW_EVENT_FORM_WITH_VALUE,
-        values
+        values,
+        coordinates
     }
 }
 
