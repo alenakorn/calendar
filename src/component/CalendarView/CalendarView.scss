@@ -25,6 +25,13 @@
     background: #F5F6FA;
   }
 
+  .fc-unthemed td.fc-day  {
+    cursor: pointer !important;
+    &:hover {
+      box-shadow: 0px 3px 6px #00000029;
+    }
+  }
+
   .fc-ltr .fc-dayGrid-view .fc-day-top .fc-day-number {
     padding: 10px 15px 0;
   }
@@ -63,5 +70,4 @@
   .fc-button-primary:not(:disabled):active:focus {
     box-shadow: 0 0 3px 0px rgba(76, 91, 106, 0.5);
   }
-
 }
