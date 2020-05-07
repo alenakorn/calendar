@@ -1,4 +1,5 @@
 import {
+    CLOSE_FORM,
     CREATE_EVENT,
     EDIT_EVENT,
     REMOVE_EVENT,
@@ -40,5 +41,12 @@ export function removeEvent(id) {
     return {
         type: REMOVE_EVENT,
         id
+    }
+}
+
+export function closeForm() {
+    console.log('close')
+    return {
+        type: CLOSE_FORM
     }
 }

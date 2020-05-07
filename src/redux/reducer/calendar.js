@@ -1,4 +1,11 @@
-import {CREATE_EVENT, EDIT_EVENT, REMOVE_EVENT, SHOW_EVENT_FORM, SHOW_EVENT_FORM_WITH_VALUE} from '../action/types'
+import {
+    CLOSE_FORM,
+    CREATE_EVENT,
+    EDIT_EVENT,
+    REMOVE_EVENT,
+    SHOW_EVENT_FORM,
+    SHOW_EVENT_FORM_WITH_VALUE
+} from '../action/types'
 import {toDate} from "../../shared/dates";
 
 const initialState = {
@@ -13,7 +20,9 @@ const initialState = {
         }
     ],
     inputsValue: {},
+    isEdit: false,
     currentDate: '',
+    colors: '',
 }
 
 export default function calendar(state = initialState, action) {
@@ -21,7 +30,6 @@ export default function calendar(state = initialState, action) {
     switch (action.type) {
 
         case SHOW_EVENT_FORM: {
-            console.log('@CREATE:', action)
             const defaultInputValues = {
                 id: state.calendarEvents.length,
                 start: new Date(),
@@ -31,17 +39,17 @@ export default function calendar(state = initialState, action) {
             }
             return {
                 ...state,
-                // showEventForm: true, // @TODO: Fix IT!!!!
+                showEventForm: true, // @TODO: Fix IT!!!!
                 inputsValue: defaultInputValues
             }
         }
 
         case SHOW_EVENT_FORM_WITH_VALUE: {
-            console.log('action.values', action.values);
             return {
                 ...state,
                 showEventForm: true,
-                inputsValue: action.values
+                inputsValue: action.values,
+                isEdit: true
             }
         }
 
@@ -67,15 +75,20 @@ export default function calendar(state = initialState, action) {
             }
             return {
                 ...state,
-                calendarEvents: [...state.calendarEvents]
+                calendarEvents: [...state.calendarEvents],
             }
 
         case REMOVE_EVENT:
             return {
                 ...state,
-                calendarEvents: [...state.calendarEvents].filter((value, key) => key !== action.id)
+                calendarEvents: [...state.calendarEvents].filter((value, key) => key !== action.id),
+                showEventForm: false,
             }
 
+        case CLOSE_FORM:
+            return {
+                showEventForm: false,
+            }
         default :
             return state;
     }

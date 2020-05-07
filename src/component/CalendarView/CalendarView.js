@@ -60,12 +60,8 @@ class CalendarView extends React.Component {
                     selectable={true}
                     editable={true}
                     droppable={true}
-                    eventDrop={function(eventBj, date) {
-                        console.log('eventDrop function');
-                    }}
-                    drop={(date, jsEvent, ui, resourceId) => {
-                        console.log('drop function');
-                    }}
+                    eventDrop={this.drop}
+                    eventReceive={this.eventReceive}
                 />
             </div>
         )
