@@ -47,10 +47,10 @@ class EventForm extends React.Component {
     render() {
         return (
             <div className="form-wrapper">
+                <button className="btn-close" type="button" onClick={() => this.props.removeEvent(this.props.inputsValue.id)}>
+                    <i className="fa fa-times-circle-o" aria-hidden="true"/>
+                </button>
                 <form onSubmit={this.handleFormSubmit}>
-                    <button type="button" onClick={() => this.props.removeEvent(this.props.inputsValue.id)}>
-                        <i className="fa fa-times-circle-o" aria-hidden="true"/>
-                    </button>
                     <input
                         type="hidden"
                         name="id"

@@ -1,19 +1,19 @@
 import {
-    CREATE_NEW_EVENT,
+    CREATE_EVENT,
     EDIT_EVENT,
     REMOVE_EVENT,
     SHOW_EVENT_FORM,
     SHOW_EVENT_FORM_WITH_VALUE
 } from './types'
 
-export function openForm(currentDate) {
+export function openEventForm(currentDate) {
     return {
         type: SHOW_EVENT_FORM,
         currentDate
     }
 }
 
-export function openFormWithValues(values) {
+export function openEventFormWithValues(values) {
     return {
         type: SHOW_EVENT_FORM_WITH_VALUE,
         values
@@ -30,7 +30,7 @@ export function editEvent(data) {
 
 export function createEvent(data) {
     return {
-        type: CREATE_NEW_EVENT,
+        type: CREATE_EVENT,
         data,
     }
 }

@@ -5,7 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid"
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from "@fullcalendar/interaction"
 import {connect} from 'react-redux'
-import {openForm, openFormWithValues} from '../../redux/action/calendar'
+import {openEventForm, openEventFormWithValues} from '../../redux/action/calendar'
 
 import './CalendarView.scss'
 
@@ -16,22 +16,18 @@ class CalendarView extends React.Component {
         calendarWeekends: true,
     }
 
-    handleDateClick = arg => {
-        // this.props.openForm(arg.date)
-        console.log('handleDateClick()', arg.date)
-        return;
+    createEvent = event => {
+        this.props.openEventForm(event.date)
     }
 
-    handleClickEvent = (event) => {
-        const data = {
+    editEvent = (event) => {
+        this.props.openEventFormWithValues({
             id: +event.event.id,
             title: event.event.title,
             start: event.event.start,
             time: event.event.start,
             notes: event.event.extendedProps.notes
-        }
-
-        this.props.openFormWithValues(data)
+        })
     }
 
     render() {
@@ -58,8 +54,8 @@ class CalendarView extends React.Component {
                     ref={this.calendarComponentRef}
                     weekends={this.state.calendarWeekends}
                     events={[...this.props.calendarEvents]}
-                    dateClick={this.handleDateClick}
-                    eventClick={this.handleClickEvent}
+                    dateClick={this.createEvent}
+                    eventClick={this.editEvent}
                     firstDay={1}
                     selectable={true}
                     editable={true}
@@ -85,8 +81,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        openForm: currentDay => dispatch(openForm(currentDay)),
-        openFormWithValues: values => dispatch(openFormWithValues(values)),
+        openEventForm: currentDay => dispatch(openEventForm(currentDay)),
+        openEventFormWithValues: values => dispatch(openEventFormWithValues(values)),
     }
 }
 

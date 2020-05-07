@@ -1,4 +1,4 @@
-import {CREATE_NEW_EVENT, EDIT_EVENT, REMOVE_EVENT, SHOW_EVENT_FORM, SHOW_EVENT_FORM_WITH_VALUE} from '../action/types'
+import {CREATE_EVENT, EDIT_EVENT, REMOVE_EVENT, SHOW_EVENT_FORM, SHOW_EVENT_FORM_WITH_VALUE} from '../action/types'
 import {toDate} from "../../shared/dates";
 
 const initialState = {
@@ -20,14 +20,24 @@ export default function calendar(state = initialState, action) {
 
     switch (action.type) {
 
-        case SHOW_EVENT_FORM:
+        case SHOW_EVENT_FORM: {
+            console.log('@CREATE:', action)
+            const defaultInputValues = {
+                id: state.calendarEvents.length,
+                start: new Date(),
+                time: new Date(),
+                title: '',
+                notes: '',
+            }
             return {
                 ...state,
-                showEventForm: true,
-                currentDate: action.currentDate
+                // showEventForm: true, // @TODO: Fix IT!!!!
+                inputsValue: defaultInputValues
             }
+        }
 
         case SHOW_EVENT_FORM_WITH_VALUE: {
+            console.log('action.values', action.values);
             return {
                 ...state,
                 showEventForm: true,
@@ -35,7 +45,7 @@ export default function calendar(state = initialState, action) {
             }
         }
 
-        case CREATE_NEW_EVENT:
+        case CREATE_EVENT:
             const calendarEvents = state.calendarEvents
             const id = calendarEvents.length
             calendarEvents.push({...action.data, id})
