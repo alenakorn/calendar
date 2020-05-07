@@ -20,6 +20,7 @@ class CalendarView extends React.Component {
 
     handleClickEvent = (event) => {
         const data = {
+            id: +event.event.id,
             title: event.event.title,
             start: event.event.start,
             time: event.event.start,

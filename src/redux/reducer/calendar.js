@@ -1,9 +1,10 @@
-import {CREATE_NEW_EVENT, SHOW_EVENT_FORM, SHOW_EVENT_FORM_WITH_VALUE} from '../action/types'
+import {CREATE_NEW_EVENT, REMOVE_EVENTS, SHOW_EVENT_FORM, SHOW_EVENT_FORM_WITH_VALUE} from '../action/types'
 
 const initialState = {
     showEventForm: false,
     calendarEvents: [
         {
+            id: 0,
             title: 'My test event',
             start: new Date(),
             time: '',
@@ -30,10 +31,18 @@ export default function calendar(state = initialState, action) {
             }
         }
         case CREATE_NEW_EVENT:
-            let calendarEvents = state.calendarEvents
-            calendarEvents.push(action.data)
+            const calendarEvents = state.calendarEvents
+            const id = calendarEvents.length
+            calendarEvents.push({...action.data, id})
+
             return {
                 ...state, showEventForm: false, calendarEvents,
+            }
+        case REMOVE_EVENTS:
+            return {
+                ...state,
+                calendarEvents: [...state.calendarEvents].filter((value,key) => key !== action.id)
+
             }
         default :
             return state;

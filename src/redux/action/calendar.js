@@ -1,4 +1,4 @@
-import {CREATE_NEW_EVENT, SHOW_EVENT_FORM, SHOW_EVENT_FORM_WITH_VALUE} from './types'
+import {CREATE_NEW_EVENT, REMOVE_EVENTS, SHOW_EVENT_FORM, SHOW_EVENT_FORM_WITH_VALUE} from './types'
 
 export function openForm(currentDate) {
     return {
@@ -15,8 +15,10 @@ export function openFormWithValues(values) {
 }
 
 export function submitForm(data) {
-    const time = data.time.split(':')
-    data.start.setHours(time[0], time[1])
+    if (data.time) {
+        const time = data.time.split(':')
+        data.start.setHours(time[0], time[1])
+    }
 
     return {
         type: CREATE_NEW_EVENT,
@@ -25,6 +27,13 @@ export function submitForm(data) {
 }
 
 
+export function removeEvents(id) {
+    console.log(id)
+    return {
+        type: REMOVE_EVENTS,
+        id
+    }
+}
 
 
 

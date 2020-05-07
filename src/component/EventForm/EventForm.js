@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux'
-import {submitForm} from '../../redux/action/calendar'
+import {removeEvents, submitForm} from '../../redux/action/calendar'
 import moment from 'moment'
 
 class EventForm extends React.Component {
@@ -50,6 +50,7 @@ class EventForm extends React.Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
+                    <button type="button" onClick={() => this.props.removeEvents(this.props.inputsValue.id)}>xDELx</button>
                     <input
                         type="text"
                         name="title"
@@ -93,6 +94,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         submitForm: data => dispatch(submitForm(data)),
+        removeEvents: id => dispatch(removeEvents(id)),
     }
 }
 
