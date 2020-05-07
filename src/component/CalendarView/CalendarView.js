@@ -5,25 +5,34 @@ import timeGridPlugin from "@fullcalendar/timegrid"
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from "@fullcalendar/interaction"
 import {connect} from 'react-redux'
-import {dateClick} from '../../redux/action/calendar'
+import {openForm, openFormWithValues} from '../../redux/action/calendar'
 
 class CalendarView extends React.Component {
 
     calendarComponentRef = React.createRef();
     state = {
         calendarWeekends: true,
-        calendarEvents: this.props.calendarEvents
     }
 
     handleDateClick = arg => {
-        this.props.dateClick(arg.date)
+        this.props.openForm(arg.date)
+    }
+
+    handleClickEvent = (event) => {
+        const data = {
+            title: event.event.title,
+            start: event.event.start,
+            time: event.event.start,
+            notes: event.event.extendedProps.notes
+        }
+
+        this.props.openFormWithValues(data)
     }
 
     render() {
         return (
             <div>
                 <FullCalendar
-                    id={this.props.randomId}
                     defaultView="dayGridMonth"
                     header={{
                         left: "today prev,next",
@@ -33,9 +42,10 @@ class CalendarView extends React.Component {
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                     ref={this.calendarComponentRef}
                     weekends={this.state.calendarWeekends}
-                    events={this.props.calendarEvents}
+                    events={[...this.props.calendarEvents]}
                     dateClick={this.handleDateClick}
                     firstDay={1}
+                    eventClick={this.handleClickEvent}
                 />
             </div>
         )
@@ -46,14 +56,13 @@ function mapStateToProps(state) {
     return {
         calendarEvents: state.calendar.calendarEvents,
         showEventForm: state.calendar.showEventForm,
-        rerenderCalendar: state.calendar.rerenderCalendar,
-        randomId: state.calendar.randomId,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        dateClick: currentDay => dispatch(dateClick(currentDay))
+        openForm: currentDay => dispatch(openForm(currentDay)),
+        openFormWithValues: values => dispatch(openFormWithValues(values)),
     }
 }
 

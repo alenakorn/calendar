@@ -1,19 +1,41 @@
 import React from "react";
 import {connect} from 'react-redux'
 import {submitForm} from '../../redux/action/calendar'
+import moment from 'moment'
 
 class EventForm extends React.Component {
 
     state = {
-        title: "",
-        start: new Date(),
-        notes: ""
+        title: this.props.inputsValue.title || "",
+        start: this.props.inputsValue.start || this.props.currentDate,
+        time: this.props.inputsValue.start || this.props.inputsValue.time,
+        notes: this.props.inputsValue.notes || ''
     };
 
+
+    fromDate(date) {
+        return moment(date).format('YYYY-MM-DD|HH:mm').split('|')
+    }
+
+    toDate(str) {
+        return moment(str, 'YYYY-MM-DD|HH:mm').toDate()
+    }
+
     handleChange = (event) => {
+        if (!(event && event.target && event.target.name)) {
+            return;
+        }
         this.setState({
             [event.target.name]: event.target.value
-        });
+        })
+    }
+
+    handleChangeDateTime = (event, type, dateRaw) => {
+        const value = (type === 'time') ? dateRaw : event.target.value;
+        const valueDate = this.toDate(value)
+        this.setState({
+            [type]: valueDate,
+        })
     }
 
     handleSubmit = (event) => {
@@ -31,24 +53,28 @@ class EventForm extends React.Component {
                     <input
                         type="text"
                         name="title"
-                        id="title"
                         value={this.state.title}
                         onChange={this.handleChange}
                     />
                     <input
-                        type="data"
+                        type="date"
                         name="start"
-                        id="start"
-                        value={new Date()}
-                        onChange={this.handleChange}
+                        value={this.fromDate(this.state.start)[0]}
+                        onChange={event => this.handleChangeDateTime(event, 'date')}
+                    />
+                    <input
+                        type="time"
+                        name="time"
+                        value={this.fromDate(this.state.time)[1]}
+                        onChange={event => this.handleChangeDateTime(event, 'time', this.fromDate(this.state.time))}
                     />
                     <input
                         type="text"
                         name="notes"
-                        id="notes"
                         value={this.state.notes}
                         onChange={this.handleChange}
                     />
+
                     <button>Cancel</button>
                     <button type='button' onClick={this.handleSaveForm}>Save</button>
                 </form>
@@ -57,10 +83,17 @@ class EventForm extends React.Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps(state) {
     return {
-        submitForm: data => dispatch(submitForm(data))
+        currentDate: state.calendar.currentDate,
+        inputsValue: state.calendar.inputsValue,
     }
 }
 
-export default connect(null, mapDispatchToProps)(EventForm);
+function mapDispatchToProps(dispatch) {
+    return {
+        submitForm: data => dispatch(submitForm(data)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventForm);

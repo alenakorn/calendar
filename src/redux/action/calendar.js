@@ -1,25 +1,28 @@
-import {CREATE_NEW_EVENT, SHOW_EVENT_FORM} from './types'
+import {CREATE_NEW_EVENT, SHOW_EVENT_FORM, SHOW_EVENT_FORM_WITH_VALUE} from './types'
 
-export function dateClick(currentDate) {
+export function openForm(currentDate) {
     return {
         type: SHOW_EVENT_FORM,
         currentDate
     }
 }
 
-export function submitForm(data) {
-    console.log('data>>', data)
+export function openFormWithValues(values) {
     return {
-        type: CREATE_NEW_EVENT,
-        data,
-        randomId: Math.random() - 1
+        type: SHOW_EVENT_FORM_WITH_VALUE,
+        values
     }
 }
 
+export function submitForm(data) {
+    const time = data.time.split(':')
+    data.start.setHours(time[0], time[1])
 
-
-
-
+    return {
+        type: CREATE_NEW_EVENT,
+        data,
+    }
+}
 
 
 
