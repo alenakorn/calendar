@@ -16,14 +16,14 @@ const initialState = {
             title: 'My test event',
             start: new Date(),
             time: '',
-            notes: 'fu'
+            notes: 'fu',
+            color: 'blur'
         }
     ],
     coordinates: {},
     inputsValue: {},
     isEdit: false,
     currentDate: '',
-    colors: '',
 }
 
 export default function calendar(state = initialState, action) {
@@ -38,6 +38,7 @@ export default function calendar(state = initialState, action) {
                 time: date,
                 title: '',
                 notes: '',
+                color: ''
             }
             return {
                 ...state,
@@ -64,7 +65,8 @@ export default function calendar(state = initialState, action) {
                 title: action.data.title,
                 start: toDate(`${action.data.startDate}|${action.data.startTime}`),
                 time: action.data.time,
-                notes: action.data.notes
+                notes: action.data.notes,
+                color: action.data.color,
             })
             return {
                 ...state,
@@ -79,7 +81,8 @@ export default function calendar(state = initialState, action) {
                     title: action.data.title,
                     start: toDate(`${action.data.startDate}|${action.data.startTime}`),
                     time: action.data.time,
-                    notes: action.data.notes
+                    notes: action.data.notes,
+                    color: action.data.color,
                 }
             }
             return {

@@ -21,6 +21,11 @@
     top: -10px;
     margin: auto;
   }
+
+  .fc-toolbar h2 {
+    font-weight: 400;
+  }
+
   form {
     padding: 5px 20px;
   }
@@ -67,5 +72,42 @@
 
   .btn-cancel {
     color: #FF5F5F;
+  }
+
+  .custom-select {
+    & div {
+      height: 30px;
+      line-height: 30px;
+    }
+    &__control {
+      border: none;
+      border-bottom: 1px solid #EAF0F4;
+      height: 30px;
+      line-height: 30px;
+      margin-bottom: 20px;
+      border-radius: 0;
+      box-shadow: none;
+      &:hover, &:focus, &:active {
+        border: none;
+        border-bottom: 1px solid #EAF0F4;
+        box-shadow: none;
+      }
+    }
+
+    &__value-container {
+      padding: 0;
+      height: 30px;
+      font-size: 11px;
+      font-family: 'Source Sans Pro', sans-serif;
+      color: #43425D;
+    }
+
+    &__indicator-separator {
+      display: none;
+    }
+
+    &__menu {
+      font-size: 11px;
+    }
   }
 }

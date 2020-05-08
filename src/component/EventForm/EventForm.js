@@ -1,9 +1,27 @@
 import React from "react";
 import {connect} from 'react-redux'
+import { colourOptions } from '../../shared/colors';
+import Select, {components} from 'react-select';
 import {closeForm, createEvent, editEvent, removeEvent} from '../../redux/action/calendar'
 import {fromDate} from "../../shared/dates";
 
 import './EventForm.scss'
+
+const customStyles = {
+    option: (provided, state) => ({
+        ...provided,
+        color: state.isSelected ? 'yellow' : 'black',
+        backgroundColor: state.isSelected ? 'green' : 'white'
+    }),
+}
+
+const { Option } = components
+const IconOption = props => (
+    <Option {...props}>
+        <i className="fa fa-square" aria-hidden="true" style={{ color: props.data.color, margin: '0 4px 0 0' }}/>
+        {props.data.label}
+    </Option>
+);
 
 class EventForm extends React.Component {
 
@@ -14,7 +32,8 @@ class EventForm extends React.Component {
             title: this.props.inputsValue.title || "",
             startDate: fromDate(this.props.inputsValue.start || this.props.currentDate)[0],
             startTime: fromDate(this.props.inputsValue.time)[1],
-            notes: this.props.inputsValue.notes || ''
+            notes: this.props.inputsValue.notes || '',
+            color: ''
         }
     }
 
@@ -33,6 +52,12 @@ class EventForm extends React.Component {
         }
         this.setState({
             [type]: event.target.value,
+        })
+    }
+
+    handleChangeSelect = (selectedOption) => {
+        this.setState({
+            color: selectedOption.color
         })
     }
 
@@ -81,6 +106,14 @@ class EventForm extends React.Component {
                         placeholder="event time"
                         value={this.state.startTime}
                         onChange={event => this.handleChangeDateTime(event, 'startTime')}
+                    />
+                    <Select
+                        classNamePrefix='custom-select'
+                        defaultValue={colourOptions[0]}
+                        options={colourOptions}
+                        style={customStyles}
+                        onChange={this.handleChangeSelect}
+                        components={{ Option: IconOption }}
                     />
                     <input
                         type="text"
