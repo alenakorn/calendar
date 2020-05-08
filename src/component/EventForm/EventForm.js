@@ -7,14 +7,6 @@ import {fromDate} from "../../shared/dates";
 
 import './EventForm.scss'
 
-const customStyles = {
-    option: (provided, state) => ({
-        ...provided,
-        color: state.isSelected ? 'yellow' : 'black',
-        backgroundColor: state.isSelected ? 'green' : 'white'
-    }),
-}
-
 const { Option } = components
 const IconOption = props => (
     <Option {...props}>
@@ -111,7 +103,6 @@ class EventForm extends React.Component {
                         classNamePrefix='custom-select'
                         defaultValue={colourOptions[0]}
                         options={colourOptions}
-                        style={customStyles}
                         onChange={this.handleChangeSelect}
                         components={{ Option: IconOption }}
                     />
