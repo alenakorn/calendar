@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8464abda8f535bd9441b490f024e1c82",
+    "revision": "4f80cec5048dbe4b8a272a87411e8f5c",
     "url": "/calendar/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/calendar/static/css/2.e61ddc62.chunk.css"
   },
   {
-    "revision": "9cedcf46f364f726bda9",
-    "url": "/calendar/static/css/main.c12069f5.chunk.css"
+    "revision": "1f66b615fab9de0f6c91",
+    "url": "/calendar/static/css/main.40bf3f7b.chunk.css"
   },
   {
     "revision": "c7cd2111932c20fc5f34",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/calendar/static/js/2.a28e0c2f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9cedcf46f364f726bda9",
-    "url": "/calendar/static/js/main.fd1a932e.chunk.js"
+    "revision": "1f66b615fab9de0f6c91",
+    "url": "/calendar/static/js/main.5648cc7d.chunk.js"
   },
   {
     "revision": "c5a09d6532e78bfec4db",
