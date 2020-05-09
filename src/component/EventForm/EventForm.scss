@@ -1,7 +1,9 @@
+@import "../../shared/variables";
+
 .form-wrapper {
-  background: #fff 0 0 no-repeat padding-box;
-  box-shadow: 0 3px 18px #00000029;
-  border: 1px solid #43425D;
+  background: $white 0 0 no-repeat padding-box;
+  box-shadow: $boxShadowPopup;
+  border: 1px solid $borderColorPopup;
   border-radius: 10px;
   max-width: 200px;
   width: 100%;
@@ -36,11 +38,11 @@
     width: 100%;
     height: 30px;
     border: none;
-    border-bottom: 1px solid #EAF0F4;
+    border-bottom: 1px solid $borderColorInput;
     margin-bottom: 20px;
     font-size: 10px;
-    font-family: 'Source Sans Pro', sans-serif;
-    color: #43425D;
+    font-family: $font;
+    color: $textColorDark;
     outline: none;
   }
 
@@ -49,9 +51,9 @@
 
     label {
       position: absolute;
-      color: #D6D6D6;
+      color: $iconColorGrey;
       font-size: 18px;
-      background: #fff;
+      background: $white;
       right: 0;
       top: 4px;
       width: 28px;
@@ -75,13 +77,13 @@
     line-height: 30px;
     height: 30px;
     margin: 10px 0;
-    color: #6A6996;
+    color: $formBtn;
     cursor: pointer;
 
     &.btn-close {
       text-transform: uppercase;
       font-size: 20px;
-      color: #D6D6D6;
+      color: $iconColorGrey;
       display: block;
       line-height: 1;
       height: auto;
@@ -90,7 +92,7 @@
   }
 
   .btn-cancel {
-    color: #FF5F5F;
+    color: $formBtnCancel;
   }
 
   .custom-select {
@@ -101,7 +103,7 @@
 
     &__control {
       border: none;
-      border-bottom: 1px solid #EAF0F4;
+      border-bottom: 1px solid $borderColorInput;
       height: 30px;
       min-height: 30px;
       max-height: 30px;
@@ -112,7 +114,7 @@
 
       &:hover, &:focus, &:active {
         border: none;
-        border-bottom: 1px solid #EAF0F4;
+        border-bottom: 1px solid $borderColorInput;
         box-shadow: none;
       }
     }
@@ -122,7 +124,7 @@
       height: 30px;
       font-size: 11px;
       font-family: 'Source Sans Pro', sans-serif;
-      color: #43425D;
+      color: $textColorDark;
       position: static;
     }
 
@@ -146,25 +148,25 @@
 
 // Placeholder
 ::-webkit-input-placeholder {
-  color: #D6D6D6;
+  color: $placeholderColor;
   position: relative;
   top: -10px;
 }
 
 ::-moz-placeholder {
-  color: #D6D6D6;
+  color: $placeholderColor;
   position: relative;
   top: -10px;
 }
 
 :-ms-input-placeholder {
-  color: #D6D6D6;
+  color: $placeholderColor;
   position: relative;
   top: -10px;
 }
 
 :-moz-placeholder {
-  color: #D6D6D6;
+  color: $placeholderColor;
   position: relative;
   top: -10px;
 }

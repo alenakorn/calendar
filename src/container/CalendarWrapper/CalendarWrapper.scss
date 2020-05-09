@@ -1,9 +1,10 @@
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';
+@import '../../shared/variables';
 
 .wrapper {
-  background: #F0F0F7;
+  background: $background;
   padding: 40px 0;
   user-select: none;
 }
