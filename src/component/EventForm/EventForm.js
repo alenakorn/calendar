@@ -19,15 +19,15 @@ class EventForm extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state  =  prepareEventItem('DEFAULT', this.props);
+        this.state = prepareEventItem('DEFAULT', this.props)
     }
 
     componentDidMount(){
-        document.addEventListener('keydown', this.escCloseFunction, false);
+        document.addEventListener('keydown', this.escCloseFunction, false)
     }
 
     componentWillUnmount(){
-        document.removeEventListener('keydown', this.escCloseFunction, false);
+        document.removeEventListener('keydown', this.escCloseFunction, false)
     }
 
     escCloseFunction = event => {

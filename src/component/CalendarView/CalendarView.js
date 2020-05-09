@@ -53,7 +53,7 @@ class CalendarView extends React.Component {
 
     getDomParentElement(elem, levelUp) {
         let destination = elem
-        let i = 0;
+        let i = 0
         while (i < levelUp) {
             if (destination.parentElement) {
                 destination = destination.parentElement
@@ -72,9 +72,9 @@ class CalendarView extends React.Component {
     render() {
         const calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]
         const calendarHeader = {
-            left: "today,prev,next",
-            center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+            left: 'today,prev,next',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         }
         const calendarButtonText = {
             today: 'Today',
@@ -88,7 +88,7 @@ class CalendarView extends React.Component {
         return (
             <div className='calendar-wrapper'>
                 <FullCalendar
-                    defaultView="dayGridMonth"
+                    defaultView='dayGridMonth'
                     header={calendarHeader}
                     buttonText={calendarButtonText}
                     plugins={calendarPlugins}

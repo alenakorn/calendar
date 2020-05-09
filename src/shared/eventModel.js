@@ -39,7 +39,6 @@ export const prepareEventItem = (type, props) => {
             }
 
         default:
-            // @TODO: Make one format: "startDate, startTime" VS "start, time"
             return {
                 id: props.inputsValue.id,
                 title: props.inputsValue.title || '',
