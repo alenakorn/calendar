@@ -12,17 +12,7 @@ import {
 
 const initialState = {
     showEventForm: false,
-    calendarEvents: [
-        {
-            id: 0,
-            title: 'My test event',
-            start: new Date(),
-            time: '',
-            notes: 'fu',
-            color: '#3B86FF',
-            colorData: ''
-        }
-    ],
+    calendarEvents: [],
     coordinates: {},
     inputsValue: {},
     isEdit: false,
@@ -65,7 +55,6 @@ export default function calendar(state = initialState, action) {
         case CREATE_EVENT:
             const dataCreate = action.payload.data
             const calendarEvents = [...state.calendarEvents]
-
             calendarEvents.push({
                 id: calendarEvents.length,
                 title: dataCreate.title,
@@ -75,7 +64,6 @@ export default function calendar(state = initialState, action) {
                 color: dataCreate.color.color,
                 colorData: dataCreate.colorData
             })
-
             return {
                 ...state,
                 showEventForm: false,
@@ -95,7 +83,6 @@ export default function calendar(state = initialState, action) {
                     colorData: dataEdit.colorData
                 }
             }
-
             return {
                 ...state,
                 calendarEvents: [...state.calendarEvents],

@@ -8,8 +8,7 @@ import rootReducer from './redux/rootReducer'
 import reduxThunk from 'redux-thunk'
 
 const loggerMiddleware = store => next => action => {
-    const result = next(action)
-    return result
+    return next(action)
 }
 
 const composeEnhancers =
