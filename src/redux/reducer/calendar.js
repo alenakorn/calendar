@@ -45,7 +45,8 @@ export default function calendar(state = initialState, action) {
                 ...state,
                 showEventForm: true,
                 coordinates: action.payload.coordinates,
-                inputsValue: defaultInputValues
+                inputsValue: defaultInputValues,
+                isEdit: false
             }
         }
 

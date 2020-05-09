@@ -1,5 +1,5 @@
 .form-wrapper {
-  background: #FFFFFF 0 0 no-repeat padding-box;
+  background: #fff 0 0 no-repeat padding-box;
   box-shadow: 0 3px 18px #00000029;
   border: 1px solid #43425D;
   border-radius: 10px;
@@ -8,6 +8,7 @@
   position: absolute;
   margin: auto;
   z-index: 1;
+
   &:before {
     content: '';
     width: 0;
@@ -37,10 +38,27 @@
     border: none;
     border-bottom: 1px solid #EAF0F4;
     margin-bottom: 20px;
-    font-size: 11px;
+    font-size: 10px;
     font-family: 'Source Sans Pro', sans-serif;
     color: #43425D;
     outline: none;
+  }
+
+  .input-wrap {
+    position: relative;
+
+    label {
+      position: absolute;
+      color: #D6D6D6;
+      font-size: 18px;
+      background: #fff;
+      right: 0;
+      top: 4px;
+      width: 28px;
+      height: 25px;
+      text-align: center;
+      pointer-events: none;
+    }
   }
 
   .btn-wrap {
@@ -59,6 +77,7 @@
     margin: 10px 0;
     color: #6A6996;
     cursor: pointer;
+
     &.btn-close {
       text-transform: uppercase;
       font-size: 20px;
@@ -79,14 +98,18 @@
       height: 30px;
       line-height: 30px;
     }
+
     &__control {
       border: none;
       border-bottom: 1px solid #EAF0F4;
       height: 30px;
+      min-height: 30px;
+      max-height: 30px;
       line-height: 30px;
       margin-bottom: 20px;
       border-radius: 0;
       box-shadow: none;
+
       &:hover, &:focus, &:active {
         border: none;
         border-bottom: 1px solid #EAF0F4;
@@ -100,6 +123,7 @@
       font-size: 11px;
       font-family: 'Source Sans Pro', sans-serif;
       color: #43425D;
+      position: static;
     }
 
     &__indicator-separator {
@@ -109,5 +133,38 @@
     &__menu {
       font-size: 11px;
     }
+
+    &__indicators {
+      max-height: 30px;
+    }
+
+    &__indicator {
+      padding: 4px;
+    }
   }
+}
+
+// Placeholder
+::-webkit-input-placeholder {
+  color: #D6D6D6;
+  position: relative;
+  top: -10px;
+}
+
+::-moz-placeholder {
+  color: #D6D6D6;
+  position: relative;
+  top: -10px;
+}
+
+:-ms-input-placeholder {
+  color: #D6D6D6;
+  position: relative;
+  top: -10px;
+}
+
+:-moz-placeholder {
+  color: #D6D6D6;
+  position: relative;
+  top: -10px;
 }

@@ -1,9 +1,12 @@
 import React from "react";
 import {connect} from 'react-redux'
-import { colourOptions } from '../../shared/colors';
-import Select, {components} from 'react-select';
+import { colourOptions } from '../../shared/colors'
+import Select, {components} from 'react-select'
 import {closeForm, createEvent, editEvent, removeEvent} from '../../redux/action/calendar'
-import {fromDate} from "../../shared/dates";
+import {fromDate} from "../../shared/dates"
+
+import onClickOutside from "react-onclickoutside";
+
 
 import './EventForm.scss'
 
@@ -16,6 +19,10 @@ const IconOption = props => (
 );
 
 class EventForm extends React.Component {
+
+    handleClickOutside = () => {
+        this.props.closeForm()
+    }
 
     constructor(props) {
         super(props)
@@ -83,23 +90,33 @@ class EventForm extends React.Component {
                         onChange={this.handleChange}
                     />
 
-                    <i className="fa fa-calendar-o" aria-hidden="true"/>
-                    <input
-                        type="date"
-                        name="date"
-                        placeholder="event date"
-                        value={this.state.startDate}
-                        onChange={event => this.handleChangeDateTime(event, 'startDate')}
-                    />
+                    <div className="input-wrap">
+                        <label htmlFor="date">
+                            <i className="fa fa-calendar-o" aria-hidden="true"/>
+                        </label>
+                        <input
+                            id="date"
+                            type="date"
+                            name="date"
+                            placeholder="event date"
+                            value={this.state.startDate}
+                            onChange={event => this.handleChangeDateTime(event, 'startDate')}
+                        />
+                    </div>
 
-                    <i className="fa fa-clock-o" aria-hidden="true"/>
-                    <input
-                        type="time"
-                        name="time"
-                        placeholder="event time"
-                        value={this.state.startTime}
-                        onChange={event => this.handleChangeDateTime(event, 'startTime')}
-                    />
+                    <div className="input-wrap">
+                        <label htmlFor="time">
+                            <i className="fa fa-clock-o" aria-hidden="true"/>
+                        </label>
+                        <input
+                            id="time"
+                            type="time"
+                            name="time"
+                            placeholder="event time"
+                            value={this.state.startTime}
+                            onChange={event => this.handleChangeDateTime(event, 'startTime')}
+                        />
+                    </div>
                     <Select
                         classNamePrefix='custom-select'
                         defaultValue={colourOptions[0]}
@@ -153,4 +170,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventForm);
+export default connect(mapStateToProps, mapDispatchToProps)(onClickOutside(EventForm));

@@ -57,11 +57,9 @@
 
   .fc-event {
     font-size: 13px;
-    line-height: 30px;
     border-radius: 4px;
-    height: 30px;
     border: 1px solid #3B86FF;
-    padding: 0 15px;
+    padding: 5px 15px;
     background-color: #3B86FF;
   }
 
@@ -92,6 +90,31 @@
     }
   }
 
+
+  .fc-now-indicator {
+    position: absolute;
+    border: 0.5px solid #3B86FF;
+    &:before, &:after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #3B86FF;
+      display: block;
+      border-radius: 50%;
+      position: absolute;
+      right: 0;
+      margin-top: -4px;
+    }
+
+    &:before {
+      right: initial;
+      left: -2px;
+    }
+
+    &-arrow {
+      display: none;
+    }
+  }
 
 
 }
