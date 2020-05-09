@@ -5,7 +5,13 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from '@fullcalendar/interaction'
 import {connect} from 'react-redux'
-import {closeForm, droppedEvent, openEventForm, openEventFormWithValues} from '../../redux/action/calendar'
+import {
+    closeForm,
+    droppedEvent,
+    getEventsFromLocalStorage,
+    openEventForm,
+    openEventFormWithValues
+} from '../../redux/action/calendar'
 
 import './CalendarView.scss'
 
@@ -14,6 +20,10 @@ class CalendarView extends React.Component {
     calendarComponentRef = React.createRef()
     state = {
         calendarWeekends: true,
+    }
+
+    componentDidMount() {
+        this.props.getEventsFromLocalStorage()
     }
 
     createEventForm = event => {
@@ -114,7 +124,8 @@ function mapDispatchToProps(dispatch) {
         openEventForm: (currentDay, coordinates) => dispatch(openEventForm(currentDay, coordinates)),
         openEventFormWithValues: (values, coordinates) => dispatch(openEventFormWithValues(values, coordinates)),
         closeForm: () => dispatch(closeForm()),
-        droppedEvent: (id, date) => dispatch(droppedEvent(id, date))
+        droppedEvent: (id, date) => dispatch(droppedEvent(id, date)),
+        getEventsFromLocalStorage: () => dispatch(getEventsFromLocalStorage())
     }
 }
 

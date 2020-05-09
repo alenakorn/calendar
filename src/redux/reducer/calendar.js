@@ -4,8 +4,8 @@ import {
     CLOSE_FORM,
     CREATE_EVENT,
     DROPPED_EVENT,
-    EDIT_EVENT,
-    REMOVE_EVENT,
+    EDIT_EVENT, GET_EVENT_FROM_LOCAL_STORAGE,
+    REMOVE_EVENT, SET_TO_LOCAL_STORAGE,
     SHOW_EVENT_FORM,
     SHOW_EVENT_FORM_WITH_VALUE
 } from '../action/types'
@@ -53,7 +53,7 @@ export default function calendar(state = initialState, action) {
         }
 
         case CREATE_EVENT:
-            const dataCreate = action.payload.data
+            const dataCreate = action.payload
             const calendarEvents = [...state.calendarEvents]
             calendarEvents.push({
                 id: calendarEvents.length,
@@ -71,7 +71,7 @@ export default function calendar(state = initialState, action) {
             }
 
         case EDIT_EVENT:
-            const dataEdit = action.payload.data
+            const dataEdit = action.payload
             if (state.calendarEvents[dataEdit.id]) {
                 state.calendarEvents[dataEdit.id] = {
                     id: dataEdit.id,
@@ -91,7 +91,7 @@ export default function calendar(state = initialState, action) {
         case REMOVE_EVENT:
             return {
                 ...state,
-                calendarEvents: [...state.calendarEvents].filter((value, key) => key !== action.payload.id),
+                calendarEvents: [...state.calendarEvents].filter((value, key) => key !== action.payload),
                 showEventForm: false,
             }
 
@@ -109,6 +109,19 @@ export default function calendar(state = initialState, action) {
             return {
                 ...state,
                 calendarEvents: [...state.calendarEvents]
+            }
+
+        case SET_TO_LOCAL_STORAGE:
+            window.localStorage.setItem('calendarEvents', JSON.stringify(state.calendarEvents))
+            return {
+                ...state
+            }
+
+
+        case GET_EVENT_FROM_LOCAL_STORAGE:
+            return {
+                ...state,
+                calendarEvents: JSON.parse(window.localStorage.getItem('calendarEvents'))
             }
 
         default :
