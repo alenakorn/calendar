@@ -10,38 +10,47 @@ import {
 export function openEventForm(currentDate, coordinates) {
     return {
         type: SHOW_EVENT_FORM,
-        coordinates,
-        currentDate
+        payload: {
+            coordinates,
+            currentDate
+        }
     }
 }
 
 export function openEventFormWithValues(values, coordinates) {
     return {
         type: SHOW_EVENT_FORM_WITH_VALUE,
-        values,
-        coordinates
+        payload: {
+            values,
+            coordinates
+        }
     }
 }
 
 export function editEvent(data) {
     return {
         type: EDIT_EVENT,
-        data,
+        payload: {
+            data
+        },
     }
 }
 
 export function createEvent(data) {
     return {
         type: CREATE_EVENT,
-        data,
+        payload: {
+            data
+        },
     }
 }
 
 export function removeEvent(id) {
-    console.log(id)
     return {
         type: REMOVE_EVENT,
-        id
+        payload: {
+            id
+        }
     }
 }
 

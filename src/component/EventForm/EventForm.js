@@ -77,6 +77,7 @@ class EventForm extends React.Component {
                     <input
                         type="text"
                         name="title"
+                        maxLength={30}
                         placeholder="event name"
                         value={this.state.title}
                         onChange={this.handleChange}

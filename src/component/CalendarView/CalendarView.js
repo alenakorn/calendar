@@ -17,6 +17,7 @@ class CalendarView extends React.Component {
     }
 
     createEventForm = event => {
+        console.log(event.jsEvent.toElement.getBoundingClientRect())
         const rect = event.jsEvent.toElement.getBoundingClientRect()
         const coordinates = {
             top: rect.bottom - (rect.height/2),
@@ -77,6 +78,7 @@ class CalendarView extends React.Component {
                     droppable={true}
                     eventDrop={this.drop}
                     eventReceive={this.eventReceive}
+                    nowIndicator={true}
                 />
             </div>
         )

@@ -31,7 +31,8 @@ export default function calendar(state = initialState, action) {
     switch (action.type) {
 
         case SHOW_EVENT_FORM: {
-            const date = action.currentDate || new Date()
+            console.log('sdsd')
+            const date = action.payload.currentDate || new Date()
             const defaultInputValues = {
                 id: state.calendarEvents.length,
                 start: date,
@@ -43,30 +44,32 @@ export default function calendar(state = initialState, action) {
             return {
                 ...state,
                 showEventForm: true,
-                coordinates: action.coordinates,
+                coordinates: action.payload.coordinates,
                 inputsValue: defaultInputValues
             }
         }
 
         case SHOW_EVENT_FORM_WITH_VALUE: {
+            console.log('df')
             return {
                 ...state,
                 showEventForm: true,
-                inputsValue: action.values,
-                coordinates: action.coordinates,
+                inputsValue: action.payload.values,
+                coordinates: action.payload.coordinates,
                 isEdit: true
             }
         }
 
         case CREATE_EVENT:
+            const dataCreate = action.payload.data
             const calendarEvents = [...state.calendarEvents]
             calendarEvents.push({
                 id: calendarEvents.length,
-                title: action.data.title,
-                start: toDate(`${action.data.startDate}|${action.data.startTime}`),
-                time: action.data.time,
-                notes: action.data.notes,
-                color: action.data.color,
+                title: dataCreate.title,
+                start: toDate(`${dataCreate.startDate}|${dataCreate.startTime}`),
+                time: dataCreate.time,
+                notes: dataCreate.notes,
+                color: dataCreate.color,
             })
             return {
                 ...state,
@@ -75,14 +78,15 @@ export default function calendar(state = initialState, action) {
             }
 
         case EDIT_EVENT:
-            if (state.calendarEvents[action.data.id]) {
-                state.calendarEvents[action.data.id] = {
-                    id: action.data.id,
-                    title: action.data.title,
-                    start: toDate(`${action.data.startDate}|${action.data.startTime}`),
-                    time: action.data.time,
-                    notes: action.data.notes,
-                    color: action.data.color,
+            const dataEdit = action.payload.data
+            if (state.calendarEvents[dataEdit.id]) {
+                state.calendarEvents[dataEdit.id] = {
+                    id: dataEdit.id,
+                    title: dataEdit.title,
+                    start: toDate(`${dataEdit.startDate}|${dataEdit.startTime}`),
+                    time: dataEdit.time,
+                    notes: dataEdit.notes,
+                    color: dataEdit.color,
                 }
             }
             return {
@@ -93,7 +97,7 @@ export default function calendar(state = initialState, action) {
         case REMOVE_EVENT:
             return {
                 ...state,
-                calendarEvents: [...state.calendarEvents].filter((value, key) => key !== action.id),
+                calendarEvents: [...state.calendarEvents].filter((value, key) => key !== action.payload.id),
                 showEventForm: false,
             }
 
