@@ -18,10 +18,6 @@ const IconOption = props => (
 
 class EventForm extends React.Component {
 
-    handleClickOutside = () => {
-        this.props.closeForm()
-    }
-
     constructor(props) {
         super(props)
         this.state  = {
@@ -30,8 +26,13 @@ class EventForm extends React.Component {
             startDate: fromDate(this.props.inputsValue.start || this.props.currentDate)[0],
             startTime: fromDate(this.props.inputsValue.time)[1],
             notes: this.props.inputsValue.notes || '',
-            color: ''
+            color: colourOptions[0]
         }
+        console.log('props', props.inputsValue)
+    }
+
+    handleClickOutside = () => {
+        this.props.closeForm()
     }
 
     handleChange = (event) => {
@@ -54,7 +55,7 @@ class EventForm extends React.Component {
 
     handleChangeSelect = (selectedOption) => {
         this.setState({
-            color: selectedOption.color
+            color: selectedOption
         })
     }
 
@@ -87,7 +88,6 @@ class EventForm extends React.Component {
                         value={this.state.title}
                         onChange={this.handleChange}
                     />
-
                     <div className="input-wrap">
                         <label htmlFor="date">
                             <i className="fa fa-calendar-o" aria-hidden="true"/>
@@ -117,7 +117,7 @@ class EventForm extends React.Component {
                     </div>
                     <Select
                         classNamePrefix='custom-select'
-                        defaultValue={colourOptions[0]}
+                        defaultValue={this.state.color}
                         options={colourOptions}
                         onChange={this.handleChangeSelect}
                         components={{ Option: IconOption }}
@@ -143,7 +143,6 @@ class EventForm extends React.Component {
                             </div>
                         )
                     }
-
                 </form>
             </div>
         )

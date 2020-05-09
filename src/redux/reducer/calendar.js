@@ -1,6 +1,7 @@
 import {
     CLOSE_FORM,
-    CREATE_EVENT, DROPPED_EVENT,
+    CREATE_EVENT,
+    DROPPED_EVENT,
     EDIT_EVENT,
     REMOVE_EVENT,
     SHOW_EVENT_FORM,
@@ -79,6 +80,7 @@ export default function calendar(state = initialState, action) {
         case EDIT_EVENT:
             const dataEdit = action.payload.data
             if (state.calendarEvents[dataEdit.id]) {
+                console.log('dataEdit.color', dataEdit.color)
                 state.calendarEvents[dataEdit.id] = {
                     id: dataEdit.id,
                     title: dataEdit.title,

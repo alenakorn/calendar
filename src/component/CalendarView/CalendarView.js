@@ -17,33 +17,46 @@ class CalendarView extends React.Component {
     }
 
     createEventForm = event => {
-        const rect = event.jsEvent.toElement.getBoundingClientRect()
-        const coordinates = {
-            top: rect.bottom - (rect.height/2),
-            left: rect.left
-        }
         this.props.closeForm()
-        this.props.openEventForm(event.date, coordinates)
+        this.props.openEventForm(event.date, this.getCoordinates(event, false))
     }
 
     editEventForm = (event) => {
-        const rect = event.jsEvent.toElement.getBoundingClientRect()
         this.props.openEventFormWithValues({
             id: +event.event.id,
             title: event.event.title,
             start: event.event.start,
             time: event.event.start,
             notes: event.event.extendedProps.notes,
-            color: event.event.backgroundColor
-        }, this.getCoordinates(rect))
+            color: event.event.color,
+        },  this.getCoordinates(event, true))
     }
 
-    getCoordinates = (rect) => {
-        return  {
-            top: rect.bottom - (rect.height/2) + 20,
-            left: rect.left - 20
+    getCoordinates = (event, isTypeEdit) => {
+        const elem = event && event.jsEvent && event.jsEvent.toElement
+        if (!event) {
+            return
         }
+        const container = this.getDomParentElement(elem, (isTypeEdit ? 6 : 5))
+        const rectElement = elem.getBoundingClientRect()
+        const rectContainer = container.getBoundingClientRect()
+        let top = rectContainer.top + Math.round(rectContainer.height / 2) + (isTypeEdit ? 20 : 0)
+        let left = rectElement.left - 15
+        return {top, left}
+    }
 
+    getDomParentElement(elem, levelUp) {
+        let destination = elem;
+        let i = 0;
+        while (i < levelUp) {
+            if (destination.parentElement) {
+                destination = destination.parentElement
+            } else {
+                return destination;
+            }
+            i++
+        }
+        return destination;
     }
 
     droppedEvent = info => {
