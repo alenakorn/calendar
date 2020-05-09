@@ -4,8 +4,10 @@ import {
     CLOSE_FORM,
     CREATE_EVENT,
     DROPPED_EVENT,
-    EDIT_EVENT, GET_EVENT_FROM_LOCAL_STORAGE,
-    REMOVE_EVENT, SET_TO_LOCAL_STORAGE,
+    EDIT_EVENT,
+    GET_EVENT_FROM_LOCAL_STORAGE,
+    SET_TO_LOCAL_STORAGE,
+    REMOVE_EVENT,
     SHOW_EVENT_FORM,
     SHOW_EVENT_FORM_WITH_VALUE
 } from '../action/types'
@@ -117,11 +119,10 @@ export default function calendar(state = initialState, action) {
                 ...state
             }
 
-
         case GET_EVENT_FROM_LOCAL_STORAGE:
             return {
                 ...state,
-                calendarEvents: JSON.parse(window.localStorage.getItem('calendarEvents'))
+                calendarEvents: JSON.parse(window.localStorage.getItem('calendarEvents')) || []
             }
 
         default :
