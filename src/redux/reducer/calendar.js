@@ -1,4 +1,4 @@
-import {toDate} from '../../shared/dates'
+import {prepareEventItem} from '../../shared/eventModel'
 
 import {
     CLOSE_FORM,
@@ -27,19 +27,11 @@ export default function calendar(state = initialState, action) {
 
         case SHOW_EVENT_FORM: {
             const date = action.payload.currentDate || new Date()
-            const defaultInputValues = {
-                id: state.calendarEvents.length,
-                start: date,
-                time: date,
-                title: '',
-                notes: '',
-                color: ''
-            }
             return {
                 ...state,
                 showEventForm: true,
                 coordinates: action.payload.coordinates,
-                inputsValue: defaultInputValues,
+                inputsValue: prepareEventItem('SHOW_EVENT_FORM', {id: state.calendarEvents.length, date}),
                 isEdit: false
             }
         }
@@ -55,17 +47,10 @@ export default function calendar(state = initialState, action) {
         }
 
         case CREATE_EVENT:
-            const dataCreate = action.payload
             const calendarEvents = [...state.calendarEvents]
-            calendarEvents.push({
-                id: calendarEvents.length,
-                title: dataCreate.title,
-                start: toDate(`${dataCreate.startDate}|${dataCreate.startTime}`),
-                time: dataCreate.time,
-                notes: dataCreate.notes,
-                color: dataCreate.color.color,
-                colorData: dataCreate.colorData
-            })
+            calendarEvents.push(
+                prepareEventItem('CREATE_EVENT', {...action.payload,  id: calendarEvents.length})
+            )
             return {
                 ...state,
                 showEventForm: false,
@@ -73,17 +58,8 @@ export default function calendar(state = initialState, action) {
             }
 
         case EDIT_EVENT:
-            const dataEdit = action.payload
-            if (state.calendarEvents[dataEdit.id]) {
-                state.calendarEvents[dataEdit.id] = {
-                    id: dataEdit.id,
-                    title: dataEdit.title,
-                    start: toDate(`${dataEdit.startDate}|${dataEdit.startTime}`),
-                    time: dataEdit.time,
-                    notes: dataEdit.notes,
-                    color: dataEdit.color.color,
-                    colorData: dataEdit.colorData
-                }
+            if (action.payload && state.calendarEvents[action.payload.id]) {
+                state.calendarEvents[action.payload.id] = prepareEventItem('EDIT_EVENT', action.payload)
             }
             return {
                 ...state,
@@ -104,7 +80,7 @@ export default function calendar(state = initialState, action) {
             }
 
         case DROPPED_EVENT:
-            if (state.calendarEvents[action.payload.id]) {
+            if (action.payload && state.calendarEvents[action.payload.id]) {
                 state.calendarEvents[action.payload.id].start = action.payload.date
             }
 

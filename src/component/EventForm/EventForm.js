@@ -1,11 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import onClickOutside from 'react-onclickoutside'
-import { colourOptions } from '../../shared/colors'
 import Select, {components} from 'react-select'
+import {colourOptions} from '../../shared/colors'
 import {closeForm, createEvent, editEvent, removeEvent} from '../../redux/action/calendar'
-import {fromDate} from '../../shared/dates'
-
+import {prepareEventItem} from '../../shared/eventModel'
 import './EventForm.scss'
 
 const { Option } = components
@@ -20,15 +19,7 @@ class EventForm extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state  = {
-            id: this.props.inputsValue.id,
-            title: this.props.inputsValue.title || '',
-            startDate: fromDate(this.props.inputsValue.start || this.props.currentDate)[0],
-            startTime: fromDate(this.props.inputsValue.time)[1],
-            notes: this.props.inputsValue.notes || '',
-            color: this.props.inputsValue.colorData || colourOptions[0],
-            colorData: this.props.inputsValue.colorData || colourOptions[0]
-        }
+        this.state  =  prepareEventItem('DEFAULT', this.props);
     }
 
     handleClickOutside = () => {

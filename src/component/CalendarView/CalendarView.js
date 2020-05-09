@@ -12,7 +12,7 @@ import {
     openEventForm,
     openEventFormWithValues
 } from '../../redux/action/calendar'
-
+import {prepareEventItem} from '../../shared/eventModel'
 import './CalendarView.scss'
 
 class CalendarView extends React.Component {
@@ -32,15 +32,10 @@ class CalendarView extends React.Component {
     }
 
     editEventForm = info => {
-        this.props.openEventFormWithValues({
-            id: +info.event.id,
-            title: info.event.title,
-            start: info.event.start,
-            time: info.event.start,
-            notes: info.event.extendedProps.notes,
-            color: info.event.backgroundColor,
-            colorData: info.event.extendedProps.colorData
-        },  this.getCoordinates(info, true))
+        this.props.openEventFormWithValues(
+            prepareEventItem('SHOW_EVENT_FORM_WITH_VALUE', info.event),
+            this.getCoordinates(info, true)
+        )
     }
 
     getCoordinates = (event, isTypeEdit) => {
@@ -75,25 +70,28 @@ class CalendarView extends React.Component {
     }
 
     render() {
+        const calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]
+        const calendarHeader = {
+            left: "today,prev,next",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
+        }
+        const calendarButtonText = {
+            today: 'Today',
+            month: 'Month',
+            week: 'Week',
+            day: 'Day',
+            list: 'Agenda',
+            prev: 'Back',
+            next: 'Next',
+        }
         return (
             <div className='calendar-wrapper'>
                 <FullCalendar
                     defaultView="dayGridMonth"
-                    header={{
-                        left: "today,prev,next",
-                        center: "title",
-                        right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
-                    }}
-                    buttonText={{
-                        today: 'Today',
-                        month: 'Month',
-                        week: 'Week',
-                        day: 'Day',
-                        list: 'Agenda',
-                        prev: 'Back',
-                        next: 'Next',
-                    }}
-                    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
+                    header={calendarHeader}
+                    buttonText={calendarButtonText}
+                    plugins={calendarPlugins}
                     ref={this.calendarComponentRef}
                     weekends={this.state.calendarWeekends}
                     events={[...this.props.calendarEvents]}
