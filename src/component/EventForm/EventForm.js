@@ -22,6 +22,20 @@ class EventForm extends React.Component {
         this.state  =  prepareEventItem('DEFAULT', this.props);
     }
 
+    componentDidMount(){
+        document.addEventListener('keydown', this.escCloseFunction, false);
+    }
+
+    componentWillUnmount(){
+        document.removeEventListener('keydown', this.escCloseFunction, false);
+    }
+
+    escCloseFunction = event => {
+        if(event.keyCode === 27) {
+            this.props.closeForm()
+        }
+    }
+
     handleClickOutside = () => {
         this.props.closeForm()
     }
