@@ -21,15 +21,16 @@ class CalendarView extends React.Component {
         this.props.openEventForm(event.date, this.getCoordinates(event, false))
     }
 
-    editEventForm = (event) => {
+    editEventForm = info => {
         this.props.openEventFormWithValues({
-            id: +event.event.id,
-            title: event.event.title,
-            start: event.event.start,
-            time: event.event.start,
-            notes: event.event.extendedProps.notes,
-            color: event.event.color,
-        },  this.getCoordinates(event, true))
+            id: +info.event.id,
+            title: info.event.title,
+            start: info.event.start,
+            time: info.event.start,
+            notes: info.event.extendedProps.notes,
+            color: info.event.backgroundColor,
+            colorData: info.event.extendedProps.colorData
+        },  this.getCoordinates(info, true))
     }
 
     getCoordinates = (event, isTypeEdit) => {

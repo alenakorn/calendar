@@ -18,7 +18,8 @@ const initialState = {
             start: new Date(),
             time: '',
             notes: 'fu',
-            color: '#3B86FF'
+            color: '#3B86FF',
+            colorData: ''
         }
     ],
     coordinates: {},
@@ -63,14 +64,17 @@ export default function calendar(state = initialState, action) {
         case CREATE_EVENT:
             const dataCreate = action.payload.data
             const calendarEvents = [...state.calendarEvents]
+
             calendarEvents.push({
                 id: calendarEvents.length,
                 title: dataCreate.title,
                 start: toDate(`${dataCreate.startDate}|${dataCreate.startTime}`),
                 time: dataCreate.time,
                 notes: dataCreate.notes,
-                color: dataCreate.color,
+                color: dataCreate.color.color,
+                colorData: dataCreate.colorData
             })
+
             return {
                 ...state,
                 showEventForm: false,
@@ -80,16 +84,17 @@ export default function calendar(state = initialState, action) {
         case EDIT_EVENT:
             const dataEdit = action.payload.data
             if (state.calendarEvents[dataEdit.id]) {
-                console.log('dataEdit.color', dataEdit.color)
                 state.calendarEvents[dataEdit.id] = {
                     id: dataEdit.id,
                     title: dataEdit.title,
                     start: toDate(`${dataEdit.startDate}|${dataEdit.startTime}`),
                     time: dataEdit.time,
                     notes: dataEdit.notes,
-                    color: dataEdit.color,
+                    color: dataEdit.color.color,
+                    colorData: dataEdit.colorData
                 }
             }
+
             return {
                 ...state,
                 calendarEvents: [...state.calendarEvents],

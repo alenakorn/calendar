@@ -26,9 +26,9 @@ class EventForm extends React.Component {
             startDate: fromDate(this.props.inputsValue.start || this.props.currentDate)[0],
             startTime: fromDate(this.props.inputsValue.time)[1],
             notes: this.props.inputsValue.notes || '',
-            color: colourOptions[0]
+            color: this.props.inputsValue.colorData || colourOptions[0],
+            colorData: this.props.inputsValue.colorData || colourOptions[0]
         }
-        console.log('props', props.inputsValue)
     }
 
     handleClickOutside = () => {
@@ -55,7 +55,8 @@ class EventForm extends React.Component {
 
     handleChangeSelect = (selectedOption) => {
         this.setState({
-            color: selectedOption
+            color: selectedOption,
+            colorData: selectedOption,
         })
     }
 
