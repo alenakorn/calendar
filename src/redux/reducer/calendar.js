@@ -1,6 +1,6 @@
 import {
     CLOSE_FORM,
-    CREATE_EVENT,
+    CREATE_EVENT, DROPPED_EVENT,
     EDIT_EVENT,
     REMOVE_EVENT,
     SHOW_EVENT_FORM,
@@ -17,7 +17,7 @@ const initialState = {
             start: new Date(),
             time: '',
             notes: 'fu',
-            color: 'blur'
+            color: '#3B86FF'
         }
     ],
     coordinates: {},
@@ -31,7 +31,6 @@ export default function calendar(state = initialState, action) {
     switch (action.type) {
 
         case SHOW_EVENT_FORM: {
-            console.log('sdsd')
             const date = action.payload.currentDate || new Date()
             const defaultInputValues = {
                 id: state.calendarEvents.length,
@@ -51,7 +50,6 @@ export default function calendar(state = initialState, action) {
         }
 
         case SHOW_EVENT_FORM_WITH_VALUE: {
-            console.log('df')
             return {
                 ...state,
                 showEventForm: true,
@@ -106,6 +104,16 @@ export default function calendar(state = initialState, action) {
             return {
                 ...state,
                 showEventForm: false,
+            }
+
+        case DROPPED_EVENT:
+            if (state.calendarEvents[action.payload.id]) {
+                state.calendarEvents[action.payload.id].start = action.payload.date
+            }
+
+            return {
+                ...state,
+                calendarEvents: [...state.calendarEvents]
             }
 
         default :

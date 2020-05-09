@@ -5,7 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid"
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from "@fullcalendar/interaction"
 import {connect} from 'react-redux'
-import {closeForm, openEventForm, openEventFormWithValues} from '../../redux/action/calendar'
+import {closeForm, droppedEvent, openEventForm, openEventFormWithValues} from '../../redux/action/calendar'
 
 import './CalendarView.scss'
 
@@ -17,7 +17,6 @@ class CalendarView extends React.Component {
     }
 
     createEventForm = event => {
-        console.log(event.jsEvent.toElement.getBoundingClientRect())
         const rect = event.jsEvent.toElement.getBoundingClientRect()
         const coordinates = {
             top: rect.bottom - (rect.height/2),
@@ -34,7 +33,8 @@ class CalendarView extends React.Component {
             title: event.event.title,
             start: event.event.start,
             time: event.event.start,
-            notes: event.event.extendedProps.notes
+            notes: event.event.extendedProps.notes,
+            color: event.event.backgroundColor
         }, this.getCoordinates(rect))
     }
 
@@ -44,6 +44,10 @@ class CalendarView extends React.Component {
             left: rect.left - 20
         }
 
+    }
+
+    droppedEvent = info => {
+        this.props.droppedEvent(+info.event.id, info.event.start)
     }
 
     render() {
@@ -76,7 +80,7 @@ class CalendarView extends React.Component {
                     selectable={true}
                     editable={true}
                     droppable={true}
-                    eventDrop={this.drop}
+                    eventDrop={this.droppedEvent}
                     eventReceive={this.eventReceive}
                     nowIndicator={true}
                 />
@@ -97,6 +101,7 @@ function mapDispatchToProps(dispatch) {
         openEventForm: (currentDay, coordinates) => dispatch(openEventForm(currentDay, coordinates)),
         openEventFormWithValues: (values, coordinates) => dispatch(openEventFormWithValues(values, coordinates)),
         closeForm: () => dispatch(closeForm()),
+        droppedEvent: (id, date) => dispatch(droppedEvent(id, date))
     }
 }
 

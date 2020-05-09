@@ -1,6 +1,6 @@
 import {
     CLOSE_FORM,
-    CREATE_EVENT,
+    CREATE_EVENT, DROPPED_EVENT,
     EDIT_EVENT,
     REMOVE_EVENT,
     SHOW_EVENT_FORM,
@@ -57,5 +57,15 @@ export function removeEvent(id) {
 export function closeForm() {
     return {
         type: CLOSE_FORM
+    }
+}
+
+export function droppedEvent(id, date) {
+    return {
+        type: DROPPED_EVENT,
+        payload: {
+            id,
+            date
+        }
     }
 }

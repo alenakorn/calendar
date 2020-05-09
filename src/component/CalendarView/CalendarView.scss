@@ -74,6 +74,9 @@
     box-shadow: $boxShadowInActive;
   }
 
+  .fc .fc-row .fc-content-skeleton td {
+    border-color: $borderColor;
+  }
   .fc-unthemed {
     .fc-list-heading td {
       height: 45px;

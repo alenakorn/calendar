@@ -1,12 +1,10 @@
-import React from "react";
+import React from 'react'
 import {connect} from 'react-redux'
+import onClickOutside from 'react-onclickoutside'
 import { colourOptions } from '../../shared/colors'
 import Select, {components} from 'react-select'
 import {closeForm, createEvent, editEvent, removeEvent} from '../../redux/action/calendar'
-import {fromDate} from "../../shared/dates"
-
-import onClickOutside from "react-onclickoutside";
-
+import {fromDate} from '../../shared/dates'
 
 import './EventForm.scss'
 
@@ -16,7 +14,7 @@ const IconOption = props => (
         <i className="fa fa-square" aria-hidden="true" style={{ color: props.data.color, margin: '0 4px 0 0' }}/>
         {props.data.label}
     </Option>
-);
+)
 
 class EventForm extends React.Component {
 
@@ -38,7 +36,7 @@ class EventForm extends React.Component {
 
     handleChange = (event) => {
         if (!(event && event.target && event.target.name)) {
-            return;
+            return
         }
         this.setState({
             [event.target.name]: event.target.value
@@ -47,7 +45,7 @@ class EventForm extends React.Component {
 
     handleChangeDateTime = (event, type) => {
         if (!(event && event.target)) {
-            return;
+            return
         }
         this.setState({
             [type]: event.target.value,
@@ -61,7 +59,7 @@ class EventForm extends React.Component {
     }
 
     handleFormSubmit = (event) => {
-        event.preventDefault();
+        event.preventDefault()
     }
 
     editEvent = () => {
@@ -148,7 +146,7 @@ class EventForm extends React.Component {
 
                 </form>
             </div>
-        );
+        )
     }
 }
 
@@ -170,4 +168,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(onClickOutside(EventForm));
+export default connect(mapStateToProps, mapDispatchToProps)(onClickOutside(EventForm))
