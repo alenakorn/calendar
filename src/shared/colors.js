@@ -9,4 +9,4 @@ export const colourOptions = [
     { value: 'forest', label: 'Forest', color: '#00875A' },
     { value: 'slate', label: 'Slate', color: '#2f4c58' },
     { value: 'silver', label: 'Silver', color: '#757a73' },
-];
+]

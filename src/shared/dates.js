@@ -1,6 +1,6 @@
-import moment from "moment";
+import moment from 'moment'
 
-export const FORMAT = 'YYYY-MM-DD|HH:mm';
+export const FORMAT = 'YYYY-MM-DD|HH:mm'
 
 export function fromDate(date) {
     return moment(date).format(FORMAT).split('|')

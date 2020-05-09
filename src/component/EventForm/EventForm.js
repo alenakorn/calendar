@@ -22,7 +22,7 @@ class EventForm extends React.Component {
         super(props)
         this.state  = {
             id: this.props.inputsValue.id,
-            title: this.props.inputsValue.title || "",
+            title: this.props.inputsValue.title || '',
             startDate: fromDate(this.props.inputsValue.start || this.props.currentDate)[0],
             startTime: fromDate(this.props.inputsValue.time)[1],
             notes: this.props.inputsValue.notes || '',

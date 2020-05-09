@@ -6,7 +6,6 @@ import EventPopover from '../../component/EventForm/EventForm'
 import CalendarView from '../../component/CalendarView/CalendarView'
 
 class CalendarWrapper extends React.Component {
-
     render() {
         return (
             <div className="wrapper">

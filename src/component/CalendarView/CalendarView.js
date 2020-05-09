@@ -1,9 +1,9 @@
-import React from "react"
-import FullCalendar from "@fullcalendar/react"
-import dayGridPlugin from "@fullcalendar/daygrid"
-import timeGridPlugin from "@fullcalendar/timegrid"
+import React from 'react'
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
-import interactionPlugin from "@fullcalendar/interaction"
+import interactionPlugin from '@fullcalendar/interaction'
 import {connect} from 'react-redux'
 import {closeForm, droppedEvent, openEventForm, openEventFormWithValues} from '../../redux/action/calendar'
 
@@ -11,7 +11,7 @@ import './CalendarView.scss'
 
 class CalendarView extends React.Component {
 
-    calendarComponentRef = React.createRef();
+    calendarComponentRef = React.createRef()
     state = {
         calendarWeekends: true,
     }
@@ -47,17 +47,17 @@ class CalendarView extends React.Component {
     }
 
     getDomParentElement(elem, levelUp) {
-        let destination = elem;
+        let destination = elem
         let i = 0;
         while (i < levelUp) {
             if (destination.parentElement) {
                 destination = destination.parentElement
             } else {
-                return destination;
+                return destination
             }
             i++
         }
-        return destination;
+        return destination
     }
 
     droppedEvent = info => {
@@ -82,7 +82,6 @@ class CalendarView extends React.Component {
                         list: 'Agenda',
                         prev: 'Back',
                         next: 'Next',
-
                     }}
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                     ref={this.calendarComponentRef}

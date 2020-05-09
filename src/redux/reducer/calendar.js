@@ -1,3 +1,5 @@
+import {toDate} from '../../shared/dates'
+
 import {
     CLOSE_FORM,
     CREATE_EVENT,
@@ -7,7 +9,6 @@ import {
     SHOW_EVENT_FORM,
     SHOW_EVENT_FORM_WITH_VALUE
 } from '../action/types'
-import {toDate} from "../../shared/dates";
 
 const initialState = {
     showEventForm: false,
@@ -124,7 +125,6 @@ export default function calendar(state = initialState, action) {
             }
 
         default :
-            return state;
+            return state
     }
-
 }

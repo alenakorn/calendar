@@ -8,17 +8,17 @@ import rootReducer from './redux/rootReducer'
 import reduxThunk from 'redux-thunk'
 
 const loggerMiddleware = store => next => action => {
-    const result = next(action);
-    return result;
-};
+    const result = next(action)
+    return result
+}
 
 const composeEnhancers =
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-        }) : compose;
+        }) : compose
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(loggerMiddleware,reduxThunk)));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(loggerMiddleware,reduxThunk)))
 
 const app = (
     <Provider store={store}>
@@ -26,4 +26,4 @@ const app = (
     </Provider>
 )
 
-ReactDOM.render(app, document.getElementById('root'));
+ReactDOM.render(app, document.getElementById('root'))
